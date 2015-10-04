@@ -30,7 +30,7 @@ def get_k3(f,h,g,g_prima,xi):
     '''
     k1 = get_k1(f,h,g,g_prima,xi)
     k2 = get_k2(f,h,g,g_prima,xi)
-    f_eval = f(xi+h,g - k1[0]+2*k2[0], g_prima - k1[0]+2*k2[0])
+    f_eval = f(xi+h,g - k1[0]+2*k2[0], g_prima - k1[1]+2*k2[1])
     return h * f_eval[0], h * f_eval[1]
 
 def RK3(f,h,g,g_prima,xi):
@@ -43,7 +43,7 @@ def RK3(f,h,g,g_prima,xi):
     k3 = get_k1(f,h,g,g_prima,xi)
 
     Y1n1 = g + (k1[0]+4*k2[0]+k3[0])/6.0
-    Y2n1 = g_prima + (k1[1]+4*k2[1]+k3[1])/6.0
+    Y2n1 = g_prima + (k1[1]+4*k2[1]+k3[1])/6
     return Y1n1,Y2n1
 
 #----------------------------------Problema 1----------------------------------#
@@ -51,15 +51,15 @@ mu=1.560 #rut=17471560-2
 N_steps = 10000
 dyds=np.zeros(N_steps)
 y=np.zeros(N_steps)
-h=(20*np.pi)/N_steps
+h=(20*np.pi) / N_steps
 
 def f(xi,g,g_prima):
     f1=g_prima
-    f2=-g-mu*((g**2)-1)*g_prima
-    return f1,f2
+    f2=-g-mu*(g*g-1)*g_prima
+    return f2,f1
 
-dyds[0]=0
-y[0]=4.0
+dyds[0]=0.0
+y[0]=0.1
 
 for i in range(1, N_steps):
     y[i], dyds[i]=RK3(f,h,y[i-1],dyds[i-1],0)
