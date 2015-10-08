@@ -18,7 +18,7 @@ N_steps = 10000
 x=np.zeros(N_steps)
 y=np.zeros(N_steps)
 z=np.zeros(N_steps)
-xyzi=[1,1,1]
+xyzi=[15,3,10]
 t_values = np.linspace(1e-3, 30, N_steps)
 
 r = ode(Lorenz_system)
@@ -32,8 +32,41 @@ for i in range(N_steps):
 
 #------------------------ se crea el grafico----------------------------------#
 
+plt.figure(1)
+plt.clf()
 
-fig = plt.figure(1)
+plt.plot(x,y)
+
+plt.xlabel('$x(t)$', fontsize=18)
+plt.ylabel('$y(y)$', fontsize=18)
+plt.show()
+plt.draw()
+
+plt.figure(2)
+plt.clf()
+
+plt.plot(y,z)
+
+plt.xlabel('$y(t)$',fontsize=18)
+plt.ylabel('$z(t)$', fontsize=18)
+plt.show()
+plt.draw()
+
+plt.figure(3)
+plt.clf()
+
+plt.plot(x,z)
+
+plt.xlabel('$x(t)$', fontsize=18)
+plt.ylabel('$z(t)$', fontsize=18)
+plt.show()
+plt.draw()
+
+
+
+
+
+fig = plt.figure(4)
 fig.clf()
 
 ax = fig.add_subplot(111, projection='3d')
@@ -42,8 +75,9 @@ ax.set_aspect('equal')
 
 ax.plot(x, y, z)
 
-ax.set_xlabel('x')
-ax.set_ylabel('y')
-ax.set_zlabel('z')
+ax.set_xlabel('$x(t)$', fontsize=18)
+ax.set_ylabel('$y(t)$', fontsize=18)
+ax.set_zlabel('$z(t)$', fontsize=18)
 
 plt.show()
+plt.draw()
